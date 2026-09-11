@@ -1,0 +1,22 @@
+rules_version = '2';
+
+// Firebase 콘솔 > Storage > 규칙(Rules) 탭에 이 내용을 그대로 붙여넣으세요.
+service firebase.storage {
+  match /b/{bucket}/o {
+
+    // 아이들이 올리는 완성작 사진
+    match /guestbook-photos/{allPaths=**} {
+      allow read: if true; // 누구나 볼 수 있음 (방명록 피드에 노출되므로)
+      allow write: if request.resource.size < 5 * 1024 * 1024 // 5MB 이하
+                   && request.resource.contentType.matches('image/.*');
+    }
+
+    // 레고 대표 이미지 (관리자가 CSV/Excel의 image_url로 외부 URL을 쓰는 경우가 많아
+    // 이 폴더는 선택 사용입니다. 직접 업로드 기능을 추가할 경우 여기에 저장하세요.)
+    match /lego-images/{allPaths=**} {
+      allow read: if true;
+      allow write: if request.resource.size < 5 * 1024 * 1024
+                   && request.resource.contentType.matches('image/.*');
+    }
+  }
+}

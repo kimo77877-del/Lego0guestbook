@@ -1,0 +1,37 @@
+@import url("https://fonts.googleapis.com/css2?family=Jua&family=Baloo+2:wght@500;700;800&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html,
+body {
+  background-color: #fdf8ec; /* cream-100 */
+  font-family: "Jua", "Baloo 2", system-ui, sans-serif;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* 태블릿 터치 시 텍스트 선택/확대 방지로 앱 같은 느낌 */
+* {
+  -webkit-user-select: none;
+  user-select: none;
+}
+input,
+textarea {
+  -webkit-user-select: text;
+  user-select: text;
+}
+
+/* 터치 스크롤 부드럽게 */
+.scroll-touch {
+  -webkit-overflow-scrolling: touch;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-thumb {
+  background: #c3ddb0;
+  border-radius: 999px;
+}
